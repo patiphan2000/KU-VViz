@@ -519,7 +519,7 @@ function KUCourseVisualizer({course,
             
         }
         else {
-            // svgElement.selectAll("g").remove();
+            svgElement.selectAll("g").remove();
             svgElement.append("g").attr("id", "bgPlain");
             svgElement.append("g").attr("id", "sem-separators");
             svgElement.append("g").attr("id", "links");
@@ -705,6 +705,28 @@ function KUCourseVisualizer({course,
                                 }}
                                 />
                                 แสดงเส้นวิชาตัวต่อ
+                            </label>
+                        </div>
+                        <div className={styles.container_checkbox}>
+                            <label className={styles.form_control}>
+                                <input 
+                                type="checkbox" 
+                                defaultChecked={true}
+                                onChange={() => {
+                                }}
+                                />
+                                แสดงผล F เป็นสีแดง
+                            </label>
+                        </div>
+                        <div className={styles.container_checkbox}>
+                            <label className={styles.form_control}>
+                                <input 
+                                type="checkbox" 
+                                defaultChecked={true}
+                                onChange={() => {
+                                }}
+                                />
+                                ห้ามวิชาแสดงผลพร้อมสหกิจศึกษา
                             </label>
                         </div>
                     </div>
