@@ -513,7 +513,7 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
         const svgElement = d3.select(ref.current);
     
         // append group for each element in svg
-        if (svgElement.selectAll("g").size() > 0) {
+        if (document.getElementById("#bgPlain")) {
             
         }
         else {
