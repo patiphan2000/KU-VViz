@@ -28,7 +28,7 @@ function getPLainDimension(level, scale) {
     const width = (nodeWidth * 2) * level;
     const scaleCap = (scale>99)? 99:scale;
     const multiplier = (100 - scaleCap) / 10;
-    const scaler = ((101 - scaleCap) / 100) * 0.5;
+    const scaler = ((101 - scaleCap) / 100);
     return {
         "viewBox": (0 - (nodeWidth/2)) + " 0 " + (width * scaler) + " " + (width * 1.9 * scaler),
         "viewPortWidth": width * 1.9,
@@ -391,7 +391,7 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
         "keyword": ''
     })
 
-    const [preLink, setPreLink] = useState(getLinkPreData(courseTree, nodeWidth, nodeHeight));
+    const [preLink, setPreLink] = useState(getLinkPreData(summerTrimer(courseTree), nodeWidth, nodeHeight));
     const [nextLink, setNextLink] = useState([]);
 
     const [isCourseView, setCourseView] = useState(true);
@@ -666,6 +666,12 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
     }, [currentData, preLink, nextLink, focusData, isCourseView, isShowLink])
 
 
+    var std_btn = (isCourseView)? `${styles.btn} ${styles.btn_secondary}`:`${styles.btn} ${styles.btn_selected}`
+    if (stdGrade.length <= 0) {
+        std_btn = `${styles.btn} ${styles.btn_secondary} ${styles.btn_disabled}`
+    }
+
+
     const filterTab = (
         <div className={styles.filter_container}>
             <div className={styles.filter_card}>
@@ -679,8 +685,7 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
                         }}
                         >ข้อมูลหลักสูตร</button>
                         <button 
-                        className={ 
-                            (isCourseView)? `${styles.btn} ${styles.btn_secondary}`:`${styles.btn} ${styles.btn_selected}`}
+                        className={std_btn}
                         onClick={() => {
                             setIsCourseView(false);
                         }}
