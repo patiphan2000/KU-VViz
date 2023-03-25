@@ -1,0 +1,1 @@
+export { KUCourseVisualizer as KuVViz } from './KUCourseVisualizer';
