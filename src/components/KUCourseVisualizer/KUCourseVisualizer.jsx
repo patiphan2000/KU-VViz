@@ -464,7 +464,7 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
         setIsCourseView(isCourseView);
     }
 
-    clearFilter()  // initially clear link line
+    // clearFilter()  // initially clear link line
 
     // Handle drag to scroll
     const [globalmousePos, setGlobalMousePos] = useState({});
@@ -513,11 +513,11 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
         const svgElement = d3.select(ref.current);
     
         // append group for each element in svg
-        // if (svgElement.selectAll("g").size() > 0) {
+        if (svgElement.selectAll("g").size() > 0) {
             
-        // }
-        // else {
-            svgElement.selectAll("g").remove();
+        }
+        else {
+            // svgElement.selectAll("g").remove();
             svgElement.append("g").attr("id", "bgPlain");
             svgElement.append("g").attr("id", "sem-separators");
             svgElement.append("g").attr("id", "links");
@@ -536,7 +536,7 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
             svgElement.select("#labels").append("g").attr("id", "sub-name");
             svgElement.select("#labels").append("g").attr("id", "sub-grade");
         
-        // }
+        }
 
         var nodes = svgElement.select("#nodes");
         var nodeBody = nodes.select("#nodes-body");
@@ -680,8 +680,8 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
                         >ข้อมูลหลักสูตร</button>
                         <button 
                         className={ () => {
-                            console.log(stdGrade.length);
-                            if (stdGrade.length <= 0) { `${styles.btn} ${styles.btn_secondary} ${styles.btn_disabled}` }
+                            // console.log(stdGrade.length);
+                            // if (stdGrade.length <= 0) { `${styles.btn} ${styles.btn_secondary} ${styles.btn_disabled}` }
                             if (isCourseView) {
                                 return `${styles.btn} ${styles.btn_secondary}`
                             } else { return `${styles.btn} ${styles.btn_selected}` }
