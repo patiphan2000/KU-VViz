@@ -10,7 +10,7 @@ import enrollData from './data/enrollData.json'
 const App = () => {
   return (<KuVViz 
   course={data.result} 
-  stdGrade={stdData.results}
+  stdGrade={[]}
   stdEnroll={enrollData.results}
   />)
 }

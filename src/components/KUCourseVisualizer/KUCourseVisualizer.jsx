@@ -28,7 +28,7 @@ function getPLainDimension(level, scale) {
     const width = (nodeWidth * 2) * level;
     const scaleCap = (scale>99)? 99:scale;
     const multiplier = (100 - scaleCap) / 10;
-    const scaler = (101 - scaleCap)/100;
+    const scaler = ((101 - scaleCap) / 100) * 0.5;
     return {
         "viewBox": (0 - (nodeWidth/2)) + " 0 " + (width * scaler) + " " + (width * 1.9 * scaler),
         "viewPortWidth": width * 1.9,
@@ -464,6 +464,8 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
         setIsCourseView(isCourseView);
     }
 
+    clearFilter()  // initially clear link line
+
     // Handle drag to scroll
     const [globalmousePos, setGlobalMousePos] = useState({});
     const [localMousePos, setLocalMousePos] = useState({});  
@@ -511,10 +513,11 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
         const svgElement = d3.select(ref.current);
     
         // append group for each element in svg
-        if (document.getElementById("#bgPlain")) {
+        // if (svgElement.selectAll("g").size() > 0) {
             
-        }
-        else {
+        // }
+        // else {
+            svgElement.selectAll("g").remove();
             svgElement.append("g").attr("id", "bgPlain");
             svgElement.append("g").attr("id", "sem-separators");
             svgElement.append("g").attr("id", "links");
@@ -533,7 +536,7 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
             svgElement.select("#labels").append("g").attr("id", "sub-name");
             svgElement.select("#labels").append("g").attr("id", "sub-grade");
         
-        }
+        // }
 
         var nodes = svgElement.select("#nodes");
         var nodeBody = nodes.select("#nodes-body");
@@ -676,7 +679,14 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
                         }}
                         >ข้อมูลหลักสูตร</button>
                         <button 
-                        className={isCourseView? `${styles.btn} ${styles.btn_secondary}`:`${styles.btn} ${styles.btn_selected}`}
+                        className={ () => {
+                            console.log(stdGrade.length);
+                            if (stdGrade.length <= 0) { `${styles.btn} ${styles.btn_secondary} ${styles.btn_disabled}` }
+                            if (isCourseView) {
+                                return `${styles.btn} ${styles.btn_secondary}`
+                            } else { return `${styles.btn} ${styles.btn_selected}` }
+                            }
+                        }
                         onClick={() => {
                             setIsCourseView(false);
                         }}
