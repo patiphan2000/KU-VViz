@@ -679,14 +679,8 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
                         }}
                         >ข้อมูลหลักสูตร</button>
                         <button 
-                        className={ () => {
-                            // console.log(stdGrade.length);
-                            // if (stdGrade.length <= 0) { `${styles.btn} ${styles.btn_secondary} ${styles.btn_disabled}` }
-                            if (isCourseView) {
-                                return `${styles.btn} ${styles.btn_secondary}`
-                            } else { return `${styles.btn} ${styles.btn_selected}` }
-                            }
-                        }
+                        className={ 
+                            (isCourseView)? `${styles.btn} ${styles.btn_secondary}`:`${styles.btn} ${styles.btn_selected}`}
                         onClick={() => {
                             setIsCourseView(false);
                         }}
