@@ -357,7 +357,9 @@ function createSemSeparator(svgElement, stdData, isCourseView, semColor) {
         .text(d => d.text);
 }
 
-function KUCourseVisualizer({course, stdGrade, stdEnroll, 
+function KUCourseVisualizer({course, 
+    stdGrade = [], 
+    stdEnroll = [], 
     semColor = {
     '0': "#ffe8c4",
     '1': "#e3e3e3",
@@ -693,16 +695,18 @@ function KUCourseVisualizer({course, stdGrade, stdEnroll,
                     </div>
                     <ZoomBar setScale={setScale}/>
                     <div className={styles.colaps_container}>
-                        <label>
-                            <input 
-                            type="checkbox" 
-                            defaultChecked={true}
-                            onChange={() => {
-                                setIsShowLink(!isShowLink)
-                            }}
-                            />
-                            แสดงเส้นวิชาตัวต่อ
-                        </label>
+                        <div className={styles.container_checkbox}>
+                            <label className={styles.form_control}>
+                                <input 
+                                type="checkbox" 
+                                defaultChecked={true}
+                                onChange={() => {
+                                    setIsShowLink(!isShowLink)
+                                }}
+                                />
+                                แสดงเส้นวิชาตัวต่อ
+                            </label>
+                        </div>
                     </div>
                     <div className={styles.grid_2}>
                     </div>

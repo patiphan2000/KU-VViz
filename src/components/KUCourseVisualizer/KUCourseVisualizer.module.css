@@ -321,3 +321,54 @@ table {
     border-radius: 0.5rem;
     text-align: left;
 }
+
+.container_checkbox {
+    max-width: 15em;
+    margin-left: 1em;
+}
+
+.form_control {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+}
+
+.form_control input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--whitesmoke);
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.1em solid var(--gray);
+    border-radius: 0.15em;
+    transform: translate3d(3em, 0.1em, 0em);
+
+    display: grid;
+    place-content: center;  
+}
+
+.form-control + .form-control {
+    margin-top: 1em;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.7em;
+    height: 0.7em;
+    transform: scale(0);
+    border-radius: 0.15em;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--success);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
