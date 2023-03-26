@@ -713,6 +713,7 @@ function KUCourseVisualizer({course,
                                 type="checkbox" 
                                 defaultChecked={true}
                                 onChange={() => {
+                                    setIsShowLink(!isShowLink)
                                 }}
                                 />
                                 แสดงผล F เป็นสีแดง
@@ -724,6 +725,7 @@ function KUCourseVisualizer({course,
                                 type="checkbox" 
                                 defaultChecked={true}
                                 onChange={() => {
+                                    setIsShowLink(!isShowLink)
                                 }}
                                 />
                                 ห้ามวิชาแสดงผลพร้อมสหกิจศึกษา
