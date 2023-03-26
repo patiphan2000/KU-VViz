@@ -47,10 +47,10 @@ function getStdTree(courseTree, gradeData, enrollData) {
     var stdTree = JSON.parse(JSON.stringify(courseTree));
     // sort by academic year
     const gradeList = gradeData.sort(compareAcadData);
-    const enrollList = enrollData[0].course;
+    const enrollList = enrollData;
 
     // if student has no record yet return the course tree 
-    if (gradeList.length <= 0 || enrollList.length <= 0) {
+    if (gradeList.length <= 0) {
         return stdTree;
     }
 
@@ -179,7 +179,7 @@ function getStdTree(courseTree, gradeData, enrollData) {
     }
 
     // add current enroll subject ------------------------------------------------
-    const currEnroll = enrollData[0].course ;
+    const currEnroll = enrollData ;
     var newGroupData = '';
 
     var maxLevel = 0; // use to shift unfinish subject later
