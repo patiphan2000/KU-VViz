@@ -357,7 +357,27 @@ function createSemSeparator(svgElement, stdData, isCourseView, semColor) {
         .text(d => d.text);
 }
 
-function KUCourseVisualizer({course, 
+const defaultData = [
+    {
+        "subject_code": "0001",
+        "subject_name_th": "วิชา I",
+        "subject_name_en": "Subject I",
+        "credit": 3,
+        "pre_subject": [],
+        "grouping_data": "1/1"
+    },
+    {
+        "subject_code": "0002",
+        "subject_name_th": "วิชา II",
+        "subject_name_en": "Subject II",
+        "credit": 3,
+        "pre_subject": ["0001"],
+        "grouping_data": "1/2"
+    }
+];
+
+function KUCourseVisualizer({
+    course = defaultData, 
     stdGrade = [], 
     stdEnroll = [], 
     semColor = {
@@ -705,30 +725,6 @@ function KUCourseVisualizer({course,
                                 }}
                                 />
                                 แสดงเส้นวิชาตัวต่อ
-                            </label>
-                        </div>
-                        <div className={styles.container_checkbox}>
-                            <label className={styles.form_control}>
-                                <input 
-                                type="checkbox" 
-                                defaultChecked={true}
-                                onChange={() => {
-                                    setIsShowLink(!isShowLink)
-                                }}
-                                />
-                                แสดงผล F เป็นสีแดง
-                            </label>
-                        </div>
-                        <div className={styles.container_checkbox}>
-                            <label className={styles.form_control}>
-                                <input 
-                                type="checkbox" 
-                                defaultChecked={true}
-                                onChange={() => {
-                                    setIsShowLink(!isShowLink)
-                                }}
-                                />
-                                ห้ามวิชาแสดงผลพร้อมสหกิจศึกษา
                             </label>
                         </div>
                     </div>
