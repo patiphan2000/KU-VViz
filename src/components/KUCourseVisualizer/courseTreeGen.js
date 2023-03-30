@@ -113,6 +113,7 @@ function getCourseTree(data) {
         // console.log(layerCounter);
     }
 
+    // console.log(courseTree);
     return courseTree
 
 }

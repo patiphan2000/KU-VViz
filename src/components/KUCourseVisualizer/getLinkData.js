@@ -3,6 +3,7 @@ function getLinkPreData(data, nodeW, nodeH) {
     for (let curr in data) {
         for (let subject in data[curr].pre_subject) {
             const preCode = data[curr].pre_subject[subject]
+            if (!data[preCode]) { continue; }
             var target = [((data[preCode].level)*nodeW*2)+nodeW, ((data[preCode].layer + 1)*nodeH*1.75) + (nodeH/2)]
             var source = [(data[curr].level)*nodeW*2, ((data[curr].layer + 1)*nodeH*1.75) + (nodeH/2)]
             if (data[curr].level%2 == 0) { source[1] -= (nodeH/2) }

@@ -396,7 +396,7 @@ function KUCourseVisualizer({
     const courseTree = getCourseTree(course);
     const stdTree = getStdTree(courseTree, stdGrade, stdEnroll);
 
-    const courseList = getListFromTree(summerTrimer(courseTree));
+    const courseList = getListFromTree(summerTrimer((courseTree)));
     const stdGradeList = getListFromTree(summerTrimer(stdTree));
 
     const ref = useRef()
