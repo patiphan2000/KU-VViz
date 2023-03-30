@@ -33,21 +33,23 @@ function getCourseTree(data) {
         };
     }
 
+    // HOT FIX: clean loss subject from pre_subject
     for (let indexSub in subjectList) {
         const currSub = subjectList[indexSub]
-        // courseTree[currSub.subject_code] = {
-        //     id: currSub.subject_code,
-        //     subject_code: currSub.subject_code,
-        //     subject_name_en: currSub.subject_name_en,
-        //     subject_name_th: currSub.subject_name_th,
-        //     pre_subject: currSub.pre_subject,
-        //     grouping_data: currSub.grouping_data,
-        //     next: [],
-        //     level: getLevel(currSub.grouping_data),
-        //     layer: -1,
-        //     grade: 'X',
-        //     depth: 0
-        // };
+        var pre_list = courseTree[currSub.subject_code].pre_subject;
+        for (let s in courseTree[currSub.subject_code].pre_subject) {
+            let sub_id = courseTree[currSub.subject_code].pre_subject[s];
+            // console.log(courseTree[currSub.subject_code].pre_subject[s]);
+            if (!courseTree[sub_id]) {
+                const index = pre_list.indexOf(sub_id);
+                pre_list.splice(index, 1);
+            }
+        }
+        courseTree[currSub.subject_code].pre_subject = pre_list;
+    }
+
+    for (let indexSub in subjectList) {
+        const currSub = subjectList[indexSub]
 
         // If no pre then add to be head of the tree
         if (currSub.pre_subject.length <= 0) {
