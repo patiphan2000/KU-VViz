@@ -31,6 +31,23 @@ function getCourseTree(data) {
             grade: 'X',
             depth: 0
         };
+    }
+
+    for (let indexSub in subjectList) {
+        const currSub = subjectList[indexSub]
+        // courseTree[currSub.subject_code] = {
+        //     id: currSub.subject_code,
+        //     subject_code: currSub.subject_code,
+        //     subject_name_en: currSub.subject_name_en,
+        //     subject_name_th: currSub.subject_name_th,
+        //     pre_subject: currSub.pre_subject,
+        //     grouping_data: currSub.grouping_data,
+        //     next: [],
+        //     level: getLevel(currSub.grouping_data),
+        //     layer: -1,
+        //     grade: 'X',
+        //     depth: 0
+        // };
 
         // If no pre then add to be head of the tree
         if (currSub.pre_subject.length <= 0) {
@@ -41,9 +58,11 @@ function getCourseTree(data) {
         // Assign next to all pre subject
         var depthList = [];
         currSub.pre_subject.forEach(p => { 
-            courseTree[p].next.push(currSub.subject_code);
-            // add depth to find max depth later
-            depthList.push(courseTree[p].level)
+            if (courseTree[p]) {  
+                courseTree[p].next.push(currSub.subject_code);
+                // add depth to find max depth later
+                depthList.push(courseTree[p].level)
+            }
         });
         courseTree[currSub.subject_code].depth = (Math.max(...depthList)) + 1
 
