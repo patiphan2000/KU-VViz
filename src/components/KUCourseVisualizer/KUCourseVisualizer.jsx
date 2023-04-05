@@ -8,6 +8,8 @@ import {getListFromTree}  from './treeListConverter';
 import { getLinkPreData, getLinkNextData } from './getLinkData';
 import { summerTrimer } from './summerTrimer';
 
+import { SubjectVerification } from '../../lib/KUCourseVerification'
+
 // import styles from './KUCourseVisualizer.module.css'
 import SearchBar from '../SearchBar/SearchBar';
 import ZoomBar from '../ZoomBar/ZoomBar';
@@ -403,7 +405,7 @@ function KUCourseVisualizer({
 
     const [currentData, setCurrentData] = useState(courseList);
 
-    const [focusHead, setFocusHead] = useState([]);
+    const [focusHead, setFocusHead] = useState();
     const [focusData, setFocusData] = useState(courseList);
     const [isFocus, setIsFocus] = useState(false);
 
@@ -549,6 +551,7 @@ function KUCourseVisualizer({
             
             svgElement.append("g").attr("id", "nodes");
 
+            svgElement.select("#nodes").append("g").attr("id", "nodes-verif");
             svgElement.select("#nodes").append("g").attr("id", "nodes-body");
 
             svgElement.select("#nodes").append("g").attr("id", "labels");
@@ -561,6 +564,30 @@ function KUCourseVisualizer({
         }
 
         var nodes = svgElement.select("#nodes");
+
+        if (isFocus && !isCourseView && focusHead.grade == "X") {
+            var nodeVerif = nodes.select("#nodes-verif")
+            nodeVerif.selectAll("foreignObject")
+            .data([focusHead])
+            .join("foreignObject")
+            .attr("class", `${styles.verif_box}`)
+            .attr("x", d => (getNodePosition(d)[0]))
+            .attr("y", d => (getNodePosition(d)[1] + (nodeWidth-80)))
+            .attr("width", nodeWidth)
+            .attr("height", nodeHeight/3)
+            // .html("ลงทะเบียนได้ &#9989;")
+            .html((d) => {
+                var isValid = true;
+                for (let i in d.pre_subject) {
+                    isValid = isValid && SubjectVerification(d.pre_subject[i].subject_code, courseTree, stdTree);
+                }
+                return (isValid)? "ลงทะเบียนเรียนได้ &#9989;":"ลงทะเบียนเรียนไม่ได้ &#10060;"
+            })
+            .transition()
+            .attr("y", d => (getNodePosition(d)[1] + (nodeWidth-35)))
+        }
+
+
         var nodeBody = nodes.select("#nodes-body");
         nodeBody.selectAll("rect")
         .data(currentData)
@@ -576,6 +603,7 @@ function KUCourseVisualizer({
         .on("click", function(d, i) { // set focus & pre, next link
             const node = i;
             var focusList = [node];
+            setFocusHead(node)
 
             // get pre link tree
             var preTree = {};
