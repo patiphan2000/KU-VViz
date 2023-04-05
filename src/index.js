@@ -5,3 +5,4 @@ import React from 'react'
 // }
 
 export { KuVViz } from './components/index';
+export { KUCourseVerification } from './lib/KUCourseVerification'
