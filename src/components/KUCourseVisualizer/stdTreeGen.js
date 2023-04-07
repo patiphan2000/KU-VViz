@@ -209,6 +209,23 @@ function getStdTree(courseTree, gradeData, enrollData) {
                 headList[subCode] = stdTree[subCode];
             }
         }
+        else {
+            stdTree[subCode] = {
+                id: subCode,
+                subject_code: subCode,
+                subject_name_en: currEnroll[sub].subject_name_en,
+                subject_name_th: currEnroll[sub].subject_name_th,
+                pre_subject: (currEnroll[sub].pre_subject)? currEnroll[sub].pre_subject: [],
+                co_subject: (currEnroll[sub].co_subject)? currEnroll[sub].co_subject:[],
+                grouping_data: newGroupData,
+                next: [],
+                level: getLevel(stdCode, newGroupData),
+                layer: -1,
+                grade: 'N',
+                depth: 1
+            };
+            headList[subCode] = stdTree[subCode];
+        }
     }
 
     // assign id for every subject & shift all the unfinish class to next layer

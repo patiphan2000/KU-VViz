@@ -23,7 +23,7 @@ export function SubjectVerification(
 
     // check with co_subject
     for (let i in currSub.co_subject) {
-        var check = !threshold.includes(stdTree[currSub.pre_subject[i]].grade);
+        var check = !threshold.includes(stdTree[currSub.co_subject[i]].grade);
         isValid = isValid || (check);
     }
 
