@@ -3,24 +3,28 @@ import { default as getStdTree } from '../components/KUCourseVisualizer/stdTreeG
 
 export function SubjectVerification(
     subject_code, courseTree, stdTree,
-    threshold = ['F', 'W', 'NP']
+    threshold = ['F', 'W', 'NP', 'X']
     ) {
     var isValid = true;
-    if (!stdTree[subject_code]) { return false; }  // if not found return false
+    if (!stdTree[subject_code]) { 
+        console.log(subject_code + " not found in stdTree");
+        return false; 
+    }  // if not found return false
     if (threshold.includes(stdTree[subject_code].grade)) { return false; }
 
     const currSub = courseTree[subject_code];
     if (!currSub) { return true; }
 
     // check with pre_subject
-    console.log(currSub.pre_subject);
     for (let i in currSub.pre_subject) {
-        isValid = isValid && (!threshold.includes(stdTree[currSub.pre_subject[i]].grade));
+        var check = !threshold.includes(stdTree[currSub.pre_subject[i]].grade);
+        isValid = isValid && (check);
     }
 
     // check with co_subject
     for (let i in currSub.co_subject) {
-        isValid = isValid || (!threshold.includes(stdTree[currSub.pre_subject[i]].grade));
+        var check = !threshold.includes(stdTree[currSub.pre_subject[i]].grade);
+        isValid = isValid || (check);
     }
 
     return isValid;

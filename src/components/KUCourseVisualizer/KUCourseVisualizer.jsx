@@ -390,7 +390,7 @@ function KUCourseVisualizer({
     lang = 'TH'
 }) {
 
-    const [graphScale, setGraphScale] = useState(75);
+    const [graphScale, setGraphScale] = useState(60);
     const setScale = (value) => {
         setGraphScale(value);
     }
@@ -572,19 +572,27 @@ function KUCourseVisualizer({
             .join("foreignObject")
             .attr("class", `${styles.verif_box}`)
             .attr("x", d => (getNodePosition(d)[0]))
-            .attr("y", d => (getNodePosition(d)[1] + (nodeWidth-80)))
+            .attr("y", d => (getNodePosition(d)[1] + (nodeHeight - 35)))
             .attr("width", nodeWidth)
             .attr("height", nodeHeight/3)
             // .html("ลงทะเบียนได้ &#9989;")
             .html((d) => {
+                const approveText = "ลงทะเบียนเรียนได้ &#9989;"
+                const rejectText = "ลงทะเบียนเรียนไม่ได้ &#10060;"
+
+                // if this subject is continue from W, F then return true
+                if (d.pre_subject.length == 1 &&
+                    stdTree[d.pre_subject[0]].subject_code == d.subject_code) {
+                    return approveText;
+                }
                 var isValid = true;
                 for (let i in d.pre_subject) {
-                    isValid = isValid && SubjectVerification(d.pre_subject[i].subject_code, courseTree, stdTree);
+                    isValid = isValid && SubjectVerification(d.pre_subject[i], courseTree, stdTree);
                 }
-                return (isValid)? "ลงทะเบียนเรียนได้ &#9989;":"ลงทะเบียนเรียนไม่ได้ &#10060;"
+                return (isValid)? approveText:rejectText
             })
-            .transition()
-            .attr("y", d => (getNodePosition(d)[1] + (nodeWidth-35)))
+            .transition(800)
+            .attr("y", d => (getNodePosition(d)[1] + (nodeHeight + 5)))
         }
 
 
