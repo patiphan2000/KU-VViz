@@ -373,3 +373,14 @@ input[type="checkbox"]::before {
 input[type="checkbox"]:checked::before {
     transform: scale(1);
 }
+
+.verif_box {
+    font-family: 'Prompt', sans-serif;
+    font-weight: 400;
+    font-size: 8px;
+    text-align: center;
+    padding: 8px;
+    background-color: white;
+    border-radius: 0.25rem;
+    filter: drop-shadow(0.2px 0.2px 2px rgb(0 0 0 / 0.4));
+}
