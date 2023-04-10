@@ -10,6 +10,8 @@ export function subjectVerification(
         console.log(subject_code + " not found in stdTree");
         return false; 
     }  // if not found return false
+
+    if (stdTree[subject_code].id.includes('-')) { return true; }  // if subject already retake or currently retake return true
     if (threshold.includes(stdTree[subject_code].grade)) { return false; }
 
     const currSub = courseTree[subject_code];
