@@ -1,1 +1,1 @@
-export {courseVerification} from './KUCourseVerification'
+export {courseVerification as CourseVerification} from './KUCourseVerification'

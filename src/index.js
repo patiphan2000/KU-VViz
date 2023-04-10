@@ -1,6 +1,6 @@
 import React from 'react'
 import { KuVViz } from './components/index';
-import { courseVerification } from './lib/index'
+import { CourseVerification } from './lib/index'
 
 
-export { KuVViz, courseVerification };
+export { KuVViz, CourseVerification };
