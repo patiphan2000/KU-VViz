@@ -23,6 +23,7 @@ function getCourseTree(data) {
             subject_code: currSub.subject_code,
             subject_name_en: currSub.subject_name_en,
             subject_name_th: currSub.subject_name_th,
+            credit: (currSub.credit)? currSub.credit:1,
             pre_subject: currSub.pre_subject,
             co_subject: (currSub.co_subject)? currSub.co_subject:[],
             grouping_data: currSub.grouping_data,

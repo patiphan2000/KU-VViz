@@ -8,7 +8,7 @@ import {getListFromTree}  from './treeListConverter';
 import { getLinkPreData, getLinkNextData } from './getLinkData';
 import { summerTrimer } from './summerTrimer';
 
-import { SubjectVerification } from '../../lib/KUCourseVerification'
+import { subjectVerification } from '../../lib/KUCourseVerification'
 
 // import styles from './KUCourseVisualizer.module.css'
 import SearchBar from '../SearchBar/SearchBar';
@@ -587,7 +587,7 @@ function KUCourseVisualizer({
                 }
                 var isValid = true;
                 for (let i in d.pre_subject) {
-                    isValid = isValid && SubjectVerification(d.pre_subject[i], courseTree, stdTree);
+                    isValid = isValid && subjectVerification(d.pre_subject[i], courseTree, stdTree);
                 }
                 return (isValid)? approveText:rejectText
             })

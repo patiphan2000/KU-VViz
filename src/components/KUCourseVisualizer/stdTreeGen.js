@@ -89,6 +89,7 @@ function getStdTree(courseTree, gradeData, enrollData) {
                     subject_code: currSub.subject_code,
                     subject_name_en: currSub.subject_name_en,
                     subject_name_th: currSub.subject_name_th,
+                    credit: currSub.credit,
                     pre_subject: currSub.pre_subject,
                     co_subject: (currSub.co_subject)? currSub.co_subject:[],
                     grouping_data: currSub.grouping_data,
@@ -114,6 +115,7 @@ function getStdTree(courseTree, gradeData, enrollData) {
             if (stdTree[currCode]) {
                 // update new data
                 stdTree[currCode].id = currSub.subject_code;
+                stdTree[currCode].credit = currSub.credit;
                 stdTree[currCode].grade = currSub.grade;
                 stdTree[currCode].grouping_data = currSub.grouping_data;
                 stdTree[currCode].level = getLevel(stdCode, currSub.grouping_data)
@@ -126,6 +128,7 @@ function getStdTree(courseTree, gradeData, enrollData) {
                     subject_code: currSub.subject_code,
                     subject_name_en: currSub.subject_name_en,
                     subject_name_th: currSub.subject_name_th,
+                    credit: currSub.credit,
                     pre_subject: [],
                     co_subject: (currSub.co_subject)? currSub.co_subject:[],
                     grouping_data: currSub.grouping_data,
@@ -156,6 +159,7 @@ function getStdTree(courseTree, gradeData, enrollData) {
             subject_code: currSub.subject_code,
             subject_name_en: currSub.subject_name_en,
             subject_name_th: currSub.subject_name_th,
+            credit: currSub.credit,
             pre_subject: stdTree[rootSubCode].pre_subject,
             co_subject: (currSub.co_subject)? currSub.co_subject:[],
             grouping_data: currSub.grouping_data,
@@ -215,6 +219,7 @@ function getStdTree(courseTree, gradeData, enrollData) {
                 subject_code: subCode,
                 subject_name_en: currEnroll[sub].subject_name_en,
                 subject_name_th: currEnroll[sub].subject_name_th,
+                credit: currEnroll[sub].credit,
                 pre_subject: (currEnroll[sub].pre_subject)? currEnroll[sub].pre_subject: [],
                 co_subject: (currEnroll[sub].co_subject)? currEnroll[sub].co_subject:[],
                 grouping_data: newGroupData,
