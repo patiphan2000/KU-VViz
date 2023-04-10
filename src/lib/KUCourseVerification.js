@@ -23,9 +23,7 @@ export function subjectVerification(
 
     // check with co_subject
     for (let i in currSub.co_subject) {
-        console.log(currSub.co_subject[i]);
-        if (!stdTree[currSub.co_subject[i]]) { 
-            console.log("not found");
+        if (!stdTree[currSub.co_subject[i]]) { // if co subject does not exist then skip
             continue; 
         }
         var check = !threshold.includes(stdTree[currSub.co_subject[i]].grade);
@@ -39,6 +37,7 @@ export function courseVerification(courses, stdGrade, stdEnroll, genEdList) {
     const courseTree = getCourseTree(courses);
     const stdTree = getStdTree(courseTree, stdGrade, stdEnroll);
     var isValid = true;
+    var requireSubResult = {}
     var genEdResult = {}
 
     // console.log(stdTree);
@@ -51,6 +50,7 @@ export function courseVerification(courses, stdGrade, stdEnroll, genEdList) {
 
         if(!subjectVerification(sub, courseTree, stdTree)) {
             isValid = false;
+            requireSubResult[sub] = stdTree[sub];
         }
 
         for (let i in genEdList) {
@@ -82,7 +82,7 @@ export function courseVerification(courses, stdGrade, stdEnroll, genEdList) {
 
     return {
         status: isValid,
-        require_subject: 0,
+        require_subject: requireSubResult,
         genEd: genEdResult
     };
 }
