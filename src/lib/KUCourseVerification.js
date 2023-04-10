@@ -23,6 +23,11 @@ export function subjectVerification(
 
     // check with co_subject
     for (let i in currSub.co_subject) {
+        console.log(currSub.co_subject[i]);
+        if (!stdTree[currSub.co_subject[i]]) { 
+            console.log("not found");
+            continue; 
+        }
         var check = !threshold.includes(stdTree[currSub.co_subject[i]].grade);
         isValid = isValid || (check);
     }
