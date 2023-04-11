@@ -44,11 +44,11 @@ export default function GenEdTable({genEdList}) {
                     }}>
                         <div name={group_name+"credit_label"} className={`${styles.credit_label} ${styles.hide}`}>เรียนแล้ว</div>
                         <div>
-                            <span style={{ color: (currGroup.credit_curr >= currGroup.credit_require)? '#02BC77':'#b2bcc8' }}>
+                            <span style={{ color: (currGroup.credit_curr >= currGroup.credit_require)? '#02BC77':'#8897aa' }}>
                                 {currGroup.credit_curr}
                             </span>
                         </div>
-                        <div name={group_name+"credit_label"} className={`${styles.credit_label}`}>หน่วยกิต</div>
+                        <div name={group_name+"credit_label"} className={`${styles.credit_label} ${styles.hide}`}>หน่วยกิต</div>
                         <div>/</div>
                         <div name={group_name+"credit_label"} className={`${styles.credit_label} ${styles.hide}`}>จากทั้งหมด</div>
                         <div>{currGroup.credit_require}</div>
@@ -56,6 +56,15 @@ export default function GenEdTable({genEdList}) {
                     </div>
                 </div>
                 <div className={`${styles.group_subjects} ${styles.column}`}>
+                    <div 
+                        className={`${styles.subject_header} ${styles.row}`}
+                        style={{ justifyContent: 'space-between' }}
+                    >
+                        <div style={{marginLeft: '7px'}}>รหัสวิชา</div>
+                        <div className={styles.subject_name}>ชื่อวิชา</div>
+                        <div>หน่วยกิต</div>
+                        <div style={{marginRight: '7px'}}>เกรด</div>
+                    </div>
                     {currGroup.subject_list.map((e) => {
                         return (
                             <div 
