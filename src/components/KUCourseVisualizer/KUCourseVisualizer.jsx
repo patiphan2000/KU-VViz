@@ -403,10 +403,12 @@ function KUCourseVisualizer({
 
     const ref = useRef()
 
-    const [currentData, setCurrentData] = useState(courseList);
+    const [isCourseView, setCourseView] = useState(false);
+
+    const [currentData, setCurrentData] = useState((isCourseView)? courseList:stdGradeList);
 
     const [focusHead, setFocusHead] = useState();
-    const [focusData, setFocusData] = useState(courseList);
+    const [focusData, setFocusData] = useState((isCourseView)? courseList:stdGradeList);
     const [isFocus, setIsFocus] = useState(false);
 
     const [filter, setFilter] = useState({
@@ -415,12 +417,10 @@ function KUCourseVisualizer({
         "keyword": ''
     })
 
-    const [preLink, setPreLink] = useState(getLinkPreData(summerTrimer(courseTree), nodeWidth, nodeHeight));
+    const [preLink, setPreLink] = useState(getLinkPreData(summerTrimer((isCourseView)? courseTree:stdTree), nodeWidth, nodeHeight));
     const [nextLink, setNextLink] = useState([]);
 
-    const [isCourseView, setCourseView] = useState(true);
-
-    const [isShowLink, setIsShowLink] = useState(false);
+    const [isShowLink, setIsShowLink] = useState(true);
 
     // set course or std view and reset
     const setIsCourseView = (value) => {
@@ -737,17 +737,17 @@ function KUCourseVisualizer({
                     <p className={styles.filter_label}>ตัวกรองข้อมูล</p>
                     <div className={styles.grid_2} id="filterDataView">
                         <button 
-                        className={isCourseView? `${styles.btn} ${styles.btn_selected}`:`${styles.btn} ${styles.btn_secondary}`}
-                        onClick={() => {
-                            setIsCourseView(true);
-                        }}
-                        >ข้อมูลหลักสูตร</button>
-                        <button 
                         className={std_btn}
                         onClick={() => {
                             setIsCourseView(false);
                         }}
                         >ข้อมูลนิสิต</button>
+                        <button 
+                        className={isCourseView? `${styles.btn} ${styles.btn_selected}`:`${styles.btn} ${styles.btn_secondary}`}
+                        onClick={() => {
+                            setIsCourseView(true);
+                        }}
+                        >ข้อมูลหลักสูตร</button>
                     </div>
                     <ZoomBar setScale={setScale}/>
                     <div className={styles.colaps_container}>
@@ -755,7 +755,7 @@ function KUCourseVisualizer({
                             <label className={styles.form_control}>
                                 <input 
                                 type="checkbox" 
-                                defaultChecked={true}
+                                defaultChecked={false}
                                 onChange={() => {
                                     setIsShowLink(!isShowLink)
                                 }}
@@ -821,7 +821,7 @@ function KUCourseVisualizer({
                             ref={ref}
                             overflow={"scroll"}
                             style={{
-                                border: "2px solid red"
+                                border: "2px solid #f5f5f5"
                             }}
                         />
                     </div>
