@@ -1,6 +1,6 @@
 import React from 'react'
-import { KuVViz } from './components/index';
+import { KuVViz, GenEDTable } from './components/index';
 import { CourseVerification } from './lib/index'
 
 
-export { KuVViz, CourseVerification };
+export { KuVViz, GenEDTable, CourseVerification };
