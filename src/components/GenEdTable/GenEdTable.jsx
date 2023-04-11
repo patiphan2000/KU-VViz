@@ -1,4 +1,4 @@
-import { color } from 'd3';
+import React from 'react';
 import styles from './GenEdTable.module.css'
 
 function getGradeColor(grade) {
