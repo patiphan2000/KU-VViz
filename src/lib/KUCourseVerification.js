@@ -68,7 +68,10 @@ export function courseVerification(courses, stdGrade, stdEnroll, genEdList) {
                 }
                 else {
                     genEdResult[group_sub].subject_list.push(stdTree[sub]);
-                    genEdResult[group_sub].credit_curr += stdTree[sub].credit;
+                    genEdResult[group_sub].credit_require = Math.min(genEdList[i].credit_min, genEdResult[group_sub].credit_require)
+                    if (!['X', 'W', 'F', 'NP'].includes(stdTree[sub].grade)) {
+                        genEdResult[group_sub].credit_curr += stdTree[sub].credit;
+                    }
                 }
                 break;
             }

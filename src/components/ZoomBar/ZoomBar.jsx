@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from './ZoomBar.module.css'
 
 function ZoomBar({setScale}) {
-    const [value, setValue] = useState(75);
+    const [value, setValue] = useState(60);
     const MAX = 100;
     const getBackgroundSize = () => {
         return {
