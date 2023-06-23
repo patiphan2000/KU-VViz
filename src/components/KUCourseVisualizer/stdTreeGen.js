@@ -74,6 +74,9 @@ function getStdTree(courseTree, gradeData, enrollData) {
             latestYear = thisAcadYear;
             latestSem = thisAcadSem;
         }
+        else if (thisAcadYear == latestYear && thisAcadSem > latestSem) {
+            latestSem = thisAcadSem;
+        }
 
         const subjects = gradeList[acad].grade;
         
